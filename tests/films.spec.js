@@ -7,7 +7,7 @@ const {
   orderByYear,
   moviesAverageByCategory,
   hoursToMinutes,
-  bestFilmOfYear,
+  bestFilmOfYear
 } = require('../src/films');
 
 // Exercise 1
@@ -94,7 +94,6 @@ describe('Function "getMoviesFromDirector"', () => {
       }
     ]);
   });
-
 });
 
 // Exercise 3
@@ -104,7 +103,9 @@ describe('Function "moviesAverageOfDirector"', () => {
   });
 
   it('should return a number', () => {
-    expect(typeof moviesAverageOfDirector(movies, 'Stanley Kubrick')).toBe('number');
+    expect(typeof moviesAverageOfDirector(movies, 'Stanley Kubrick')).toBe(
+      'number'
+    );
   });
 
   it('should be different from NaN', () => {
@@ -112,34 +113,38 @@ describe('Function "moviesAverageOfDirector"', () => {
   });
 
   it(' should return the average score of movies selecting only the director films. With 2 decimals! ', () => {
-    expect(moviesAverageOfDirector([
-      {
-        title: 'Paths of Glory',
-        year: 1957,
-        director: 'Stanley Kubrick',
-        duration: '1h 28min',
-        genre: ['Drama', 'War'],
-        score: 8.4
-      },
-      {
-        title: 'Django Unchained',
-        year: 2012,
-        director: 'Quentin Tarantino',
-        duration: '2h 45min',
-        genre: ['Drama', 'Western'],
-        score: 8.4
-      },
-      {
-        title: 'Pulp Fiction',
-        year: 1994,
-        director: 'Quentin Tarantino',
-        duration: '2h 34min',
-        genre: ['Crime', 'Drama'],
-        score: 8.9
-      }
-    ], 'Quentin Tarantino')).toBe(8.65);
+    expect(
+      moviesAverageOfDirector(
+        [
+          {
+            title: 'Paths of Glory',
+            year: 1957,
+            director: 'Stanley Kubrick',
+            duration: '1h 28min',
+            genre: ['Drama', 'War'],
+            score: 8.4
+          },
+          {
+            title: 'Django Unchained',
+            year: 2012,
+            director: 'Quentin Tarantino',
+            duration: '2h 45min',
+            genre: ['Drama', 'Western'],
+            score: 8.4
+          },
+          {
+            title: 'Pulp Fiction',
+            year: 1994,
+            director: 'Quentin Tarantino',
+            duration: '2h 34min',
+            genre: ['Crime', 'Drama'],
+            score: 8.9
+          }
+        ],
+        'Quentin Tarantino'
+      )
+    ).toBe(8.65);
   });
-
 });
 
 // Exercise 4
@@ -293,8 +298,70 @@ describe('Function "orderByYear"', () => {
 // Exercise 6
 // YOUR CODE HERE. Test moviesAverageByCategory()
 describe('Function "moviesAverageByCategory"', () => {
-  it('ADD YOUR CODE IN films.spec.js file', () => {
-    expect(typeof hoursToMinutes).toBe('coffee');
+  it('should be declared', () => {
+    expect(typeof moviesAverageByCategory).toBe('function');
+  });
+  it('should return 0 with an empty array', () => {
+    expect(moviesAverageByCategory([], '')).toBe(0);
+  });
+  it('should return 0 with empty category', () => {
+    expect(moviesAverageByCategory([
+       {
+        genre: ['Biography', 'Comedy', 'Drama'],
+        score: 8.6
+      },
+      {
+        genre: ['Comedy', 'Drama', 'Family', 'Romance'],
+        score: 8.5
+      }
+    ], '')).toBe(0);
+  });
+  it('should return 0 with wrong category', () => {
+    expect(moviesAverageByCategory([
+       {
+        genre: ['Biography', 'Comedy', 'Drama'],
+        score: 8.6
+      },
+      {
+        genre: ['Comedy', 'Drama', 'Family', 'Romance'],
+        score: 8.5
+      }
+    ], 'War')).toBe(0);
+  });
+  it('should return a number', () => {
+    expect(typeof moviesAverageByCategory(movies, "Comedy")).toBe('number');
+  });
+  it('should return 1 decimal number', () => {
+    expect(moviesAverageByCategory([
+       {
+        genre: ['Biography', 'Comedy', 'Drama'],
+        score: 8.6
+      },
+      {
+        genre: ['Comedy', 'Drama', 'Family', 'Romance'],
+        score: 8.5
+      }
+    ], 'Comedy')).toBe(8.6);
+  });
+  it('should calculate average value correctly', () => {
+    expect(moviesAverageByCategory([
+      {
+        genre: ['Biography', 'Comedy', 'Drama'],
+        score: 8
+      },
+      {
+        genre: ['Comedy', 'Drama', 'Family', 'Romance'],
+        score: 10
+      },
+      {
+        genre: ['Biography', 'Comedy', 'Drama'],
+        score: 9.2
+      },
+      {
+        genre: ['Comedy', 'Drama', 'Family', 'Romance'],
+        score: 8.8
+      }
+    ], 'Comedy')).toBe(9);
   });
 });
 
@@ -371,7 +438,7 @@ describe('Function "bestFilmOfYear"', () => {
         duration: '1h 28min',
         genre: ['Drama', 'War'],
         score: 5
-      },
+      }
     ];
     expect(bestFilmOfYear(testArr, 1957)).toEqual([
       {
@@ -384,5 +451,4 @@ describe('Function "bestFilmOfYear"', () => {
       }
     ]);
   });
-
 });

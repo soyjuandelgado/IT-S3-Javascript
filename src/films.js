@@ -1,7 +1,7 @@
 // Exercise 1: Get the array of all directors.
 function getAllDirectors(array) {
   if(!Array.isArray(array))
-    return []; 
+    return; 
 
   let result =  array.map(element => element.director);
   console.log("EXERCICE 1 ->", result);
@@ -11,7 +11,7 @@ function getAllDirectors(array) {
 // Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(array, director) {
   if(!Array.isArray(array))
-    return []; 
+    return; 
   let result = array.filter((movie) => movie.director == director);
   console.log("EXERCICE 2 ->", result);
   return result;
@@ -20,9 +20,9 @@ function getMoviesFromDirector(array, director) {
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
   if(!Array.isArray(array))
-    return []; 
+    return; 
 
-  let movies = array.filter((movie) => movie.director == director); //Sustituir por getMoviesFromDirector
+  let movies = getMoviesFromDirector(array, director); 
   let result = movies.reduce((sum, movie) => sum + movie.score, 0)
   result = result / movies.length;
   result = Math.round(result * 100) / 100;
@@ -33,7 +33,7 @@ function moviesAverageOfDirector(array, director) {
 // Exercise 4:  Alphabetic order by title 
 function orderAlphabetically(array) {
   if(!Array.isArray(array))
-    return []; 
+    return; 
 
   let result = array.reduce((ordered, movie) => {
     if(ordered.length==0)
@@ -55,7 +55,7 @@ function orderAlphabetically(array) {
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
   if(!Array.isArray(array))
-    return []; 
+    return; 
 
   let result = array.reduce((ordered, movie) => {
     if(ordered.length == 0)
@@ -68,7 +68,6 @@ function orderByYear(array) {
         i++;
       ordered.splice(i, 0, movie);
     }
-    //console.log("EXERCICE 5 ->", ordered[i]);
      return ordered;
   }, [])
 
@@ -77,8 +76,20 @@ function orderByYear(array) {
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
-
+function moviesAverageByCategory(array, category) {
+  let result = array.reduce( (values, movie) => {
+    if (movie.genre.some(genre => genre == category)){
+      values.sum += movie.score;
+      values.quantity++;
+    }
+    return values;
+  }, {sum:0, quantity:0}) 
+  
+  if (result.quantity == 0)
+    return 0;
+  let average = Math.round((result.sum / result.quantity) * 10) / 10;
+  console.log("EXERCICE 6 ->", average);
+  return average;
 }
 
 // Exercise 7: Modify the duration of movies to minutes

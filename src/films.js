@@ -31,22 +31,17 @@ function orderAlphabetically(array) {
 
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
-  let result = array.reduce((ordered, movie) => {
-    if(ordered.length == 0)
-      ordered.push(movie);
-     else{
-      let i = 0;
-      while(i < ordered.length && movie.year > ordered[i].year)
-        i++;
-      while(i < ordered.length && movie.year == ordered[i].year && movie.title > ordered[i].title)
-        i++;
-      ordered.splice(i, 0, movie);
-    }
-     return ordered;
-  }, [])
+  let moviesByYear = [...array];
+  moviesByYear.sort( (a,b) => {
+    let res = a.year - b.year;
+    if(res == 0)
+      res = (a.title < b.title) ? -1 : 
+        (a.title > b.title) ? 1 : 0;
+    return res;
+  });
 
-  console.log("EXERCICE 5 ->", result);
-  return result;
+  console.log("EXERCICE 5 ->", moviesByYear);
+  return moviesByYear;
 }
 
 // Exercise 6: Calculate the average of the movies in a category

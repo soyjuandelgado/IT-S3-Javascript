@@ -15,7 +15,7 @@ function moviesAverageOfDirector(array, director) {
   let movies = getMoviesFromDirector(array, director); 
   let result = movies.reduce((sum, movie) => sum + movie.score, 0)
   result = result / movies.length;
-  result = (Math.round(result * 100) / 100);
+  result = Math.round(result * 100) / 100;
   return result;
 }
 

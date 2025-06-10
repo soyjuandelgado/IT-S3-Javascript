@@ -1,14 +1,12 @@
 // Exercise 1: Get the array of all directors.
 function getAllDirectors(array) {
   let result =  array.map(element => element.director);
-  console.log("EXERCICE 1 ->", result);
   return result;
 }
 
 // Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(array, director) {
   let result = array.filter((movie) => movie.director == director);
-  console.log("EXERCICE 2 ->", result);
   return result;
 }
 
@@ -17,15 +15,13 @@ function moviesAverageOfDirector(array, director) {
   let movies = getMoviesFromDirector(array, director); 
   let result = movies.reduce((sum, movie) => sum + movie.score, 0)
   result = result / movies.length;
-  result = Math.round(result * 100) / 100;
-  console.log("EXERCICE 3 ->", result);
+  result = (Math.round(result * 100) / 100);
   return result;
 }
 
 function orderAlphabetically(array) {
   let titles = array.map( movie => movie.title);
   titles.sort();
-  console.log("EXERCICE 4 ->", titles);
   return titles.slice(0,20);
 }
 
@@ -39,8 +35,6 @@ function orderByYear(array) {
         (a.title > b.title) ? 1 : 0;
     return res;
   });
-
-  console.log("EXERCICE 5 ->", moviesByYear);
   return moviesByYear;
 }
 
@@ -57,7 +51,6 @@ function moviesAverageByCategory(array, category) {
   if (result.quantity == 0)
     return 0;
   let average = Math.round((result.sum / result.quantity) * 10) / 10;
-  console.log("EXERCICE 6 ->", average);
   return average;
 }
 
@@ -70,7 +63,6 @@ function hoursToMinutes(array) {
     minutes += hours * 60;
     return {...movie, duration: minutes};  //hace una copia de movie modificando la duracion
   });
-  console.log("EXERCICE 7 ->", result);
   return result;
 }
 
